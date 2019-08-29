@@ -17,13 +17,4 @@ docker run --rm \
             -v $SOURCE_PATH:/tmp/src \
             -v $REPORT_PATH:/tmp/reports \
             ${DOCKER_IMAGE} \
-                --suppression /tmp/src/suppression.xml
-            
-# return exit code 0 when exit code is 242 (warnings occurred)
-retVal=$?
-if [ $retVal -eq 242 ]; then
-	printf "Warnings occurred\n"
-	exit 0
-fi
-#exit $retVal
-exit 0
+                --suppression /tmp/src/suppression.xml || true
