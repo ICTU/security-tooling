@@ -10,16 +10,36 @@ printf "Running security: ZAP\n"
 
 mkdir -p $REPORT_PATH
 
-# Passive scan (shorter)
-ZAP_CMD="zap-baseline.py -t $APPLICATION_URL"
-
-# Active scan (more intensive)
-#ZAP_CMD="zap-full-scan.py -t $APPLICATION_URL"
-
-# Passive scan with authentication:
-#ZAP_CMD="zap-baseline.py -t $APPLICATION_URL -z ""auth.loginurl=$APPLICATION_URL/LOGIN_PAGE auth.username=""USERNAME"" auth.password=""PASSWORD"" auth.auto=1"""
+# Passive scan (short) with max duration of 60 minutes
+PASSIVE_SCAN="zap-baseline.py -t $APPLICATION_URL -r report.html -x report.xml -m 60"
+# Active scan (more intensive) with max duration of 60 minutes
+ACTIVE_SCAN="zap-full-scan.py -t $APPLICATION_URL -r report.html -x report.xml -m 60"
 
 docker pull ictu/zap2docker-weekly
-docker run --rm -v $REPORT_PATH:/zap/wrk:rw -t ictu/zap2docker-weekly $ZAP_CMD -r zap-scan-report.html -m 60 -d --hook=/zap/auth_hook.py
+
+# Passive scan
+docker run --rm -v $REPORT_PATH:/zap/wrk:rw -t ictu/zap2docker-weekly $PASSIVE_SCAN
+
+# Active scan
+#docker run --rm -v $REPORT_PATH:/zap/wrk:rw -t ictu/zap2docker-weekly $ACTIVE_SCAN
+
+# Passive scan with automatic authentication
+#docker run --rm -v $REPORT_PATH:/zap/wrk:rw -t ictu/zap2docker-weekly $PASSIVE_SCAN \
+#  --hook=/zap/auth_hook.py \
+#  -z "auth.loginurl=$APPLICATION_URL \
+#      auth.username="USERNAME" \
+#      auth.password="PASSWORD" \
+#      auth.auto=1"
+            
+# Active scan with manual authentication
+#docker run --rm -v $REPORT_PATH:/zap/wrk:rw -t ictu/zap2docker-weekly $PASSIVE_SCAN \
+#  --hook=/zap/auth_hook.py \
+#  -z "auth.loginurl=$APPLICATION_URL \
+#      auth.username="USERNAME" \
+#      auth.password="PASSWORD" \
+#      auth.username_field="USERNAME_FIELD_NAME_OR_ID" \
+#      auth.password_field="PASSWORD_FIELD_NAME_OR_ID" \
+#      auth.submit_field="SUBMIT_FIELD_NAME_OR_ID" \
+#      auth.auto=0"
 
 exit 0
