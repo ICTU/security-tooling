@@ -27,7 +27,7 @@ if(!(Test-Path $datapath)){
 
 if(!(Test-Path ($temppath+'\dependency-check'))){
     Write-Host "Dependency check is not installed, downloading..."
-    Invoke-WebRequest http://dl.bintray.com/jeremy-long/owasp/dependency-check-5.0.0-M3-release.zip -OutFile $zipfile
+    Invoke-WebRequest http://dl.bintray.com/jeremy-long/owasp/dependency-check-5.2.4-release.zip -OutFile $zipfile
     Write-Host "Extracting..."
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $temppath)
