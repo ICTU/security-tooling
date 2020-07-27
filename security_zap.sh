@@ -2,7 +2,6 @@
 
 # Example run: ./security_zap.sh https://www.host.com /tmp/report
 
-CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APPLICATION_URL="$1"
 REPORT_PATH="$2"
 
