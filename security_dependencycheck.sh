@@ -30,6 +30,8 @@ docker pull owasp/dependency-check:$DC_VERSION
 
 cp $CUR_DIR/suppression.xml $SOURCE_PATH/security/dependency-check-suppression.xml
 docker run --rm \
+            -e user=$USER \
+            -u $(id -u ${USER}):$(id -g ${USER}) \
             --volume $SOURCE_PATH:/src:z \
             --volume $REPORT_PATH:/report:z \
             --volume "$DATA_DIRECTORY":/usr/share/dependency-check/data:z \
