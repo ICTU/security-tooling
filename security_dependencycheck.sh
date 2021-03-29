@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Example run: ./security_dependencycheck.sh /build/src /tmp/report
+# Exclude format: --exclude \"**/myfolder/**\"
 
 CUR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SOURCE_PATH="$1"
