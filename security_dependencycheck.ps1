@@ -9,6 +9,7 @@ $temppath = 'c:\temp\'
 $dotnetsetupfile = $temppath + 'dotnet-install.ps1'
 $zipfile =  $temppath + 'dependency-check.zip'
 $datapath =  $temppath + 'dependency-check-data\'
+$githubLatestReleases = "https://api.github.com/repos/jeremylong/DependencyCheck/releases/latest"
 
 Write-Host $zipfile $sourcepath $datapath
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -27,7 +28,10 @@ if(!(Test-Path $datapath)){
 
 if(!(Test-Path ($temppath+'\dependency-check'))){
     Write-Host "Dependency check is not installed, downloading..."
-    Invoke-WebRequest http://dl.bintray.com/jeremy-long/owasp/dependency-check-5.2.4-release.zip -OutFile $zipfile
+
+    $Uri = ((Invoke-WebRequest $gitHubLatestReleases) | ConvertFrom-Json).assets[0].browser_download_url  
+
+    Invoke-WebRequest $Uri -OutFile $zipfile
     Write-Host "Extracting..."
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     [System.IO.Compression.ZipFile]::ExtractToDirectory($zipfile, $temppath)
