@@ -29,7 +29,9 @@ if(!(Test-Path $datapath)){
 if(!(Test-Path ($temppath+'\dependency-check'))){
     Write-Host "Dependency check is not installed, downloading..."
 
-    $Uri = ((Invoke-WebRequest $gitHubLatestReleases) | ConvertFrom-Json).assets[0].browser_download_url  
+    $Uri = ((Invoke-WebRequest $gitHubLatestReleases) | ConvertFrom-Json).assets[0].browser_download_url
+
+    Write-Host "Downloading release $Uri..."
 
     Invoke-WebRequest $Uri -OutFile $zipfile
     Write-Host "Extracting..."
