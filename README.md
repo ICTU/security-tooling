@@ -17,7 +17,7 @@ The output from all of these scripts can be used in Quality Time metrics.
   * Project: https://www.openvas.org/
 * Nuclei
   * Linux (Docker): security_nuclei.sh
-  * Project: https://nuclei.projectdiscovery.io/nuclei/get-started/
+  * Project: https://github.com/projectdiscovery/nuclei
 
 Examples:
 
