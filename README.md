@@ -1,3 +1,11 @@
+# Project security-tooling [ARCHIVED]
+
+## 🚨 Repository archived🚨
+At March 22nd 2024, this repository is officially archived and will no longer be maintained.
+
+## Why is this archived?
+It is (only) a set of scripts to start several open source security tools but since some of them are deprecated or changed and all information in this repository is also available in documentation of the specific tools, there's no reason to keep it alive.
+
 # security-tooling
 Scripts for running CI/CD security tooling
 
@@ -32,3 +40,6 @@ Examples:
 
 ./security_nuclei.sh https://www.host.com /tmp/report
 ```
+
+## Get in touch
+Point of contact for this repository is [Team ICTU/security](https://github.com/orgs/ICTU/teams/security), as stated above: this repository is now archived and will no longer be maintained actively.
